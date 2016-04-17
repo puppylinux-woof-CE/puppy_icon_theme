@@ -1,0 +1,19 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<svg height="100" width="100">
+
+  <defs>
+    <radialGradient
+      id="RG1" cx="50" cy="50" fx="50" fy="50" r="40"
+      gradientUnits="userSpaceOnUse">
+      <stop style="stop-color:#fff;stop-opacity:0;" offset="1"/>
+      <stop style="stop-color:#fff;stop-opacity:0.5;" offset="0"/>
+    </radialGradient>
+  </defs>
+
+  <path style="fill:#DD3318" d="m 14,44 9,-31 c 0,0 20,-10 35,2 L 49,47 C 49,47 35,36 14,44 z"/>
+  <path style="fill:#45AC3C" d="m 62,18 -9,32 c 0,0 14,11 36,1 l 9,-31 c 0,0 -20,11 -36,-2 z"/>
+  <path style="fill:#1847C7" d="M 48,52 38,83 C 38,83 26,71 4,82 l 9,-33 c 0,0 18,-9 35,3 z"/>
+  <path style="fill:#B6B110" d="M 52,54 42,85 c 0,0 13,14 37,3 l 9,-32 c 0,0 -21,11 -36,-2 z"/>
+  <circle  cx="50" cy="50" r="40" style="fill:url(#RG1)"/>
+
+</svg>

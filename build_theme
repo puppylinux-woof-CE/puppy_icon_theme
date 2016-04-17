@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# build an icon theme from svg source - a bit hard coded :P
+# (c) Michael Amadio, 2016 - GPLv2
+
+[ -f ./build.conf ] && . ./build.conf
+[ -z "$NAME" ] &&  NAME=Generic
+[ -z "$COMMENT" ] && COMMENT="An Icon Theme" || COMMENT="$2"
+THEME="$NAME"
+echo "Please wait. Processing $1 ..."
+[ -d "$THEME" ] && rm -r "$THEME"
+TMP0=$(mktemp -p /tmp icn.XXXXXXXXX)
+TMP1=$(mktemp -p /tmp fix.XXXXXXXXX)
+(
+cd icons
+# find each icon
+while read -r line;do
+	[ "${line:0:1}" = "#" ] && continue
+	[ -z "$line" ] && continue
+	# process, construct each icon
+	while read -r a b c; do 
+		[ -d "../${THEME}/${a}" ] || mkdir -p "../${THEME}/${a}"
+		SIZE=${a%/*}
+		[ "$SIZE" = 'scalable' ] && SIZE=256 # fix scalable
+		sed 's/height="100" width="100"/height="'${SIZE}px'" width="'${SIZE}px'" viewBox="0 0 100 100"/g' < $b > "../${THEME}/${a}/${b}"
+		# link(s) to icon if needed
+		for link in `echo "$c"`;do
+			[ -z "$b" ] && continue
+			(cd "../${THEME}/${a}"; ln -sf "$b" "$link")
+		done
+	done <<< "$line"
+done < ../theme.conf
+)
+
+# constuct the index.theme
+echo '[Icon Theme]' > "${THEME}"/index.theme
+echo "Name=${THEME}" >> "${THEME}"/index.theme
+echo "Inherits=Hicolor" >> "${THEME}"/index.theme
+echo "Comment=$COMMENT" >> "${THEME}"/index.theme
+echo -n "Directories=" >> "${THEME}"/index.theme
+(cd "${THEME}"; find . -type d -mindepth 2) > $TMP0
+while read -r w;do
+	echo -n "${w#*/}," >> $TMP1
+done < $TMP0
+cat "$TMP1" | sed 's/,$//' >> "${THEME}"/index.theme
+rm $TMP1
+echo "" >> "${THEME}"/index.theme 
+while read -r y;do
+	yy=${y#*/}
+	py=${yy#*/}
+	echo "" >> "${THEME}"/index.theme  
+	case $yy in 
+		scalable*)
+			echo "[${yy}]" >> "${THEME}"/index.theme
+			echo "Size=256" >> "${THEME}"/index.theme
+			echo "Context=${py^}" >> "${THEME}"/index.theme #first char upper
+			echo "Type=Scalable" >> "${THEME}"/index.theme
+			echo "MinSize=8" >> "${THEME}"/index.theme
+			echo "MaxSize=512" >> "${THEME}"/index.theme
+			;;
+		*)
+			echo "[${yy}]" >> "${THEME}"/index.theme
+			SIZE=${yy%/*}
+			echo "Size=${SIZE}" >> "${THEME}"/index.theme
+			echo "Context=${py^}" >> "${THEME}"/index.theme
+			echo "Type=fixed" >> "${THEME}"/index.theme
+			;;
+	esac
+done < $TMP0
+rm $TMP0
+# pack it up
+pkg=`echo "${THEME}"|sed 's/ /_/'` # replace spaces
+echo "Packaging ${THEME} as ${pkg}.tar.xz."
+[ -f "${pkg}.tar.xz" ] && rm "${pkg}.tar.xz"
+tar -cJf ${pkg}.tar.xz "${THEME}"
+echo 'Done!'
