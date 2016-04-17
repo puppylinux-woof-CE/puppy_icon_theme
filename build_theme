@@ -5,9 +5,9 @@
 
 [ -f ./build.conf ] && . ./build.conf
 [ -z "$NAME" ] &&  NAME=Generic
-[ -z "$COMMENT" ] && COMMENT="An Icon Theme" || COMMENT="$2"
+[ -z "$COMMENT" ] && COMMENT="An Icon Theme"
 THEME="$NAME"
-echo "Please wait. Processing $1 ..."
+echo "Please wait. Processing $THEME ..."
 [ -d "$THEME" ] && rm -r "$THEME"
 TMP0=$(mktemp -p /tmp icn.XXXXXXXXX)
 TMP1=$(mktemp -p /tmp fix.XXXXXXXXX)
