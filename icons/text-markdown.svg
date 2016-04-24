@@ -3,10 +3,7 @@
 
   <path style="fill:#ffffff;stroke:none;" d="m 65,3 0,19 19,0 z"/>
   <path style="fill:#EBEBDA;stroke:#777777;stroke-width:2;" d="m 65,3 0,19 19,0 0,74 -72,0 0,-93 53,0 19,19"/>
-  <g  style="fill:none;stroke:#FF8C3A;stroke-width:5;">
-	<path d="m 35,30 -15,20 15,20 " />  
-	<path d="m 55,20 -15,60 " />
-	<path d="m 60,30 15,20 -15,20 " />
-  </g>
+  
+  <path style="fill:#EBEBDA;stroke:#777777;stroke-width:8;" d="M 25,70 25,30 35,55 45,30 45,70 M 55,70 55,33 Q 70,33 70,48 Q 70,68 55,66 z"/>
 
 </svg>
