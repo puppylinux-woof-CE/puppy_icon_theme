@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg height="100" width="100">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="100" width="100">
 
-  <path style="fill:#222;stroke:none;" d="M 10,85 45,5 55,5 90,85 79,85 70,65 30,65 21,85 z M 32,60 68,60 50,18 z M 10,90 90,90 90,96 10,96 z"/>
+  <path style="fill:#ffffff;stroke:none;" d="m 67,3 0,19 19,0 z"/>
+  <path style="fill:#EBEBDA;stroke:#777777;stroke-width:2;" d="m 67,3 0,19 19,0 0,74 -72,0 0,-93 53,0 19,19"/>
   
+  <path style="fill:#222;stroke:none;" d="M 16,85 45,5 55,5 84,85 73,85 67,65 33,65 27,85 z M 35,60 65,60 50,18 z M 16,88 84,88 84,94 16,94 z"/>
+
 </svg>
