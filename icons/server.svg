@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg height="100" width="100">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="100" width="100">
   
   <path style="fill:none;stroke:#222222;stroke-width:4" d="m 2,51 14,0 0,13 0,-13 78,0 -10,0 0,-13 0,13 -31,0 0,-14"/>
   <rect x="25" y="10" rx="5" ry="5" width="50" height="84" style="fill:#888"/>
