@@ -23,5 +23,5 @@ entirely not necessary.
 ## Artwork
 
 I am no artist! ( @01micko ). Some of the icons could do with some (a lot?)
-of work. Feel free to send in your pull requests but none built from InkScape 
-or othe SVG editors please.
+of work. Feel free to send in your pull requests but no icons built from InkScape 
+or other SVG editors please.
