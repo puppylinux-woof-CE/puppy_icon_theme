@@ -2,16 +2,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="100" width="100">
 
   <defs>
-    <linearGradient id="LG1">
-      <stop style="stop-color:#123141;stop-opacity:1;" offset="1"/>
-      <stop style="stop-color:#679BCB;stop-opacity:1;" offset="0"/>
-    </linearGradient>
-    <radialGradient
-      id="RG1" xlink:href="#LG1" cx="35" cy="34" fx="50" fy="32" r="28"
-      gradientTransform="matrix(1,0,0,0.94,0,2)"
-      gradientUnits="userSpaceOnUse" />
+    <radialGradient id="RG1" cx="35%" cy="34%" fx="50%" fy="32%" r="28%">
+      <stop style="stop-color:rgb(103,155,203);stop-opacity:0.75;" offset="0%"/>
+      <stop style="stop-color:rgb(18,49,65);stop-opacity:1;" offset="100%"/>
+    </radialGradient>
   </defs>
   
+  <ellipse cx="35" cy="34" rx="32" ry="30" style="stroke-width:3;stroke:#123141;fill:none;"/>
   <ellipse cx="35" cy="34" rx="32" ry="30" style="fill:url(#RG1);fill-opacity:1;fill-rule:nonzero"/>
   <g style="fill:none;stroke:#aaaaaa;stroke-width:1.5px;stroke-linecap:butt;" >
     <path d="M 36,64 C 22,56 19,46 19,34 19,22 26,10 36,4 l 0,60 C 36,64 54,55 54,34 54,13 36,4 36,4" />
@@ -19,7 +16,6 @@
     <path d="m 13,15 c 0,0 12,7 23,7 13,0 23,-7 23,-7"/>
     <path d="m 13,54 c 0,0 9,-7 23,-7 16,0 23,7 23,7"/>
   </g>
-  <ellipse cx="35" cy="34" rx="32" ry="30" style="stroke-width:3;stroke:#123141;fill:none;"/>
 
   <path style="fill:none;stroke:#cccccc;stroke-width:6;" d="M 11,56 C 19,45 32,46 39,35 41,32 41,25 36,22"/>
   <ellipse cx="35" cy="22" rx="5" ry="5" style="fill:#007B00;stroke:#cccccc;stroke-width:2"/>
