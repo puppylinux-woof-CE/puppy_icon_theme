@@ -25,7 +25,11 @@ while read -r line;do
 		while read -r ent;do
 			[ -z "$ent" ] && continue # skip blank lines
 			if [ "${ent:0:4}" = '<svg' ];then
-				printf "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" height=\"${SIZE}px\" width=\"${SIZE}px\" viewBox=\"0 0 100 100\">\n" >> "../${THEME}/${a}/${b}"
+				if echo "$ent" | grep -q 'xlink';then
+					printf "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" height=\"${SIZE}px\" width=\"${SIZE}px\" viewBox=\"0 0 100 100\">\n" >> "../${THEME}/${a}/${b}"
+				else
+					printf "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" height=\"${SIZE}px\" width=\"${SIZE}px\" viewBox=\"0 0 100 100\">\n" >> "../${THEME}/${a}/${b}"
+				fi
 			elif [ "${ent:0:5}" = '<?xml' -o "${ent:0:6}" = '</svg>' ];then
 				printf "%s\n" "${ent}" >> "../${THEME}/${a}/${b}"
 			else
