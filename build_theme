@@ -51,7 +51,7 @@ echo "Name=${THEME}" >> "${THEME}"/index.theme
 echo "Inherits=Hicolor" >> "${THEME}"/index.theme
 echo "Comment=$COMMENT" >> "${THEME}"/index.theme
 echo -n "Directories=" >> "${THEME}"/index.theme
-(cd "${THEME}"; find . -type d -mindepth 2) > $TMP0
+(cd "${THEME}"; find ./16 ./22 ./24 ./32 ./48 ./64 ./scalable -type d -mindepth 1) > $TMP0
 while read -r w;do
 	echo -n "${w#*/}," >> $TMP1
 done < $TMP0
