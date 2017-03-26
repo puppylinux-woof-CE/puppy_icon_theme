@@ -8,7 +8,7 @@
     </radialGradient>
   </defs>
   
-  <rect width="90" height="10" x="5" y="80" style="fill:url(#RG1);stroke:#0F9324;stroke-width:5"/>
-  <path d="M 7,70 93,70 50,15 z" style="fill:url(#RG1);stroke:#0F9324;stroke-width:5"/>
+  <rect width="60" height="10" x="20" y="70" style="fill:url(#RG1);stroke:#0F9324;stroke-width:5"/>
+  <path d="M 22,60 78,60 50,20 z" style="fill:url(#RG1);stroke:#0F9324;stroke-width:5"/>
 
 </svg>

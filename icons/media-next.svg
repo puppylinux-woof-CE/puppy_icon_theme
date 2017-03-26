@@ -9,6 +9,6 @@
     </radialGradient>
   </defs>
 
-  <path style="fill:url(#RG1);stroke:#0F9324;stroke-width:6" d="m 5,5 0,91 75,-45 z m 80,91 10,0 0,-91 -10,0 z"/>
+  <path style="fill:url(#RG1);stroke:#0F9324;stroke-width:6" d="m 20,20 0,60 50,-30 z m 55,60 10,0 0,-60 -10,0 z"/>
 
 </svg>
