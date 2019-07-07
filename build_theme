@@ -81,9 +81,13 @@ while read -r y;do
 	esac
 done < $TMP0
 rm $TMP0
-# pack it up
+# move to dir structure
 pkg=`echo "${THEME}"|sed 's/ /_/'` # replace spaces
-echo "Packaging ${THEME} as ${pkg}.tar.xz."
+pkg=${pkg,,}_icons # lower case
+mkdir -p ${pkg}/usr/share/icons
+cp -arf "$THEME" ${pkg}/usr/share/icons
+# pack it up
+echo "Packaging ${pkg} as ${pkg}.tar.xz."
 [ -f "${pkg}.tar.xz" ] && rm "${pkg}.tar.xz"
-tar -cJf ${pkg}.tar.xz "${THEME}"
+tar -cJf ${pkg}.tar.xz "${pkg}"
 echo 'Done!'
