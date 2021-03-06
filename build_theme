@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # build an icon theme from svg source - a bit hard coded :P
-# (c) Michael Amadio, 2016 - GPLv2
+# (c) Michael Amadio, 2016,2019 - GPLv2
 
 [ -f ./build.conf ] && . ./build.conf
 [ -z "$NAME" ] &&  NAME=Generic
@@ -26,9 +26,9 @@ while read -r line;do
 			[ -z "$ent" ] && continue # skip blank lines
 			if [ "${ent:0:4}" = '<svg' ];then
 				if echo "$ent" | grep -q 'xlink';then
-					printf "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" height=\"${SIZE}px\" width=\"${SIZE}px\" viewBox=\"0 0 100 100\">\n" >> "../${THEME}/${a}/${b}"
+					printf "<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"1.1\" height=\"${SIZE}px\" width=\"${SIZE}px\" viewBox=\"$VIEWBOX\">\n" >> "../${THEME}/${a}/${b}"
 				else
-					printf "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" height=\"${SIZE}px\" width=\"${SIZE}px\" viewBox=\"0 0 100 100\">\n" >> "../${THEME}/${a}/${b}"
+					printf "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" height=\"${SIZE}px\" width=\"${SIZE}px\" viewBox=\"$VIEWBOX\">\n" >> "../${THEME}/${a}/${b}"
 				fi
 			elif [ "${ent:0:5}" = '<?xml' -o "${ent:0:6}" = '</svg>' ];then
 				printf "%s\n" "${ent}" >> "../${THEME}/${a}/${b}"
@@ -51,7 +51,7 @@ echo "Name=${THEME}" >> "${THEME}"/index.theme
 echo "Inherits=Hicolor" >> "${THEME}"/index.theme
 echo "Comment=$COMMENT" >> "${THEME}"/index.theme
 echo -n "Directories=" >> "${THEME}"/index.theme
-(cd "${THEME}"; find ./16 ./22 ./24 ./32 ./48 ./64 ./scalable -type d -mindepth 1) > $TMP0
+(cd "${THEME}"; find ./16 ./22 ./24 ./32 ./48 ./64 ./scalable -mindepth 1 -type d) > $TMP0
 while read -r w;do
 	echo -n "${w#*/}," >> $TMP1
 done < $TMP0
@@ -86,6 +86,69 @@ pkg=`echo "${THEME}"|sed 's/ /_/'` # replace spaces
 pkg=${pkg,,}_icons # lower case
 mkdir -p ${pkg}/usr/share/icons
 cp -arf "$THEME" ${pkg}/usr/share/icons
+# build rox desktop theme
+roxtheme=`echo "${THEME}"|sed 's/ //'` # replace spaces
+mkdir -p ${pkg}/usr/local/lib/X11/themes/${roxtheme}
+( cd $pkg
+echo -n "Constructing ${roxtheme} ROX desktop icon theme... "
+TGT_DIR=usr/local/lib/X11/themes/${roxtheme}
+SRC_DIR="usr/share/icons/${THEME}/48"
+mkdir -p ${TGT_DIR}
+for m in application-x-compressed.svg application-pet.svg;do
+	case $m in
+		*compressed*)t=archive.svg;;
+		*pet*)t=pet.svg;;
+	esac
+	cp -af "${SRC_DIR}/mimetypes/$m" ${TGT_DIR}/${t}
+done
+for a in internet.svg chat.svg paint.svg edit.svg libreoffice-calc.svg libreoffice-draw.svg libreoffice-writer.svg calendar.svg terminal.svg mail.svg x.svg network.svg module.svg screen_lock.svg multimedia.svg;do
+	case $a in
+		internet*)u=www.svg;;
+		*calc*)u=spread.svg;;
+		*draw*)u=draw.svg;;
+		*writer*)u=word.svg;;
+		calendar*)u=date.svg;;
+		terminal*)u=console.svg;;
+		mail*)u=email.svg;;
+		network*)u=connect.svg;;
+		module*)u=utility.svg;;
+		screen_lock*)u=lock-screen.svg;;
+		chat*|paint*|edit*|x*|multimedia*)u=$a;;
+	esac
+	cp -af "${SRC_DIR}/apps/$a" ${TGT_DIR}/${u}
+done
+for p in directory.svg trash_full.svg trash_empty.svg;do
+	case $p in
+		dir*)v=folder.svg;;
+		trash_empty*)v=trashcan_empty.svg;;
+		trash_full*)v=trashcan_full.svg;;
+	esac
+	cp -af "${SRC_DIR}/places/$p" ${TGT_DIR}/${v}
+done
+for d in cdrom.svg floppy.svg harddisk.svg disk_usb.svg computer.svg flashcard.svg;do
+	case $d in
+		cdrom*)w=optical.svg;;
+		harddisk*)w=drive.svg;;
+		*usb*)w=usbdrv.svg;;
+		computer*)w=pc.svg;;
+		flashcard*)w=card.svg;;
+		*)w=$d;;
+	esac
+	cp -af "${SRC_DIR}/devices/$d" ${TGT_DIR}/${w}
+done
+for x in save.svg home.svg shutdown.svg;do
+	cp -af "${SRC_DIR}/actions/$x" ${TGT_DIR}/${x}
+done
+for c in game.svg preferences.svg dialog-info.svg;do
+	case $c in
+		game*)y=games.svg;;
+		preferences*)y=configuration.svg;;
+		*info*)y=help.svg;;
+	esac
+	cp -af "${SRC_DIR}/categories/$c" ${TGT_DIR}/${y}
+done		
+echo "done!"
+)
 # pack it up
 echo "Packaging ${pkg} as ${pkg}.tar.xz."
 [ -f "${pkg}.tar.xz" ] && rm "${pkg}.tar.xz"
