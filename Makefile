@@ -11,5 +11,6 @@ install:
 	-cp -ar "$(THEME)"/* $(DESTDIR)/$(ICNS_HOME)/"$(THEME)"
 
 clean:
-	-rm -r "$(THEME)"
-	-rm *.tar.xz
+	-rm -rf "$(THEME)"
+	-rm -f *.tar.xz
+	-rm -rf *_icons

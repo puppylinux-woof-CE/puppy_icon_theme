@@ -87,7 +87,9 @@ pkg=${pkg,,}_icons # lower case
 mkdir -p ${pkg}/usr/share/icons
 cp -arf "$THEME" ${pkg}/usr/share/icons
 # build rox desktop theme
-roxtheme=`echo "${THEME}"|sed 's/ //'` # replace spaces
+#roxtheme=`echo "${THEME}"|sed 's/ //'` # replace spaces
+#Special for Puppy Standard
+roxtheme=StandardSvg
 mkdir -p ${pkg}/usr/local/lib/X11/themes/${roxtheme}
 ( cd $pkg
 echo -n "Constructing ${roxtheme} ROX desktop icon theme... "
@@ -101,7 +103,7 @@ for m in application-x-compressed.svg application-pet.svg;do
 	esac
 	cp -af "${SRC_DIR}/mimetypes/$m" ${TGT_DIR}/${t}
 done
-for a in internet.svg chat.svg paint.svg edit.svg libreoffice-calc.svg libreoffice-draw.svg libreoffice-writer.svg calendar.svg terminal.svg mail.svg x.svg network.svg module.svg screen_lock.svg multimedia.svg;do
+for a in internet.svg chat.svg paint.svg edit.svg libreoffice-calc.svg libreoffice-draw.svg libreoffice-writer.svg calendar.svg terminal.svg mail.svg network.svg module.svg screen_lock.svg multimedia.svg;do
 	case $a in
 		internet*)u=www.svg;;
 		*calc*)u=spread.svg;;
@@ -113,13 +115,14 @@ for a in internet.svg chat.svg paint.svg edit.svg libreoffice-calc.svg libreoffi
 		network*)u=connect.svg;;
 		module*)u=utility.svg;;
 		screen_lock*)u=lock-screen.svg;;
-		chat*|paint*|edit*|x*|multimedia*)u=$a;;
+		chat*|paint*|edit*|multimedia*)u=$a;;
 	esac
 	cp -af "${SRC_DIR}/apps/$a" ${TGT_DIR}/${u}
 done
-for p in directory.svg trash_full.svg trash_empty.svg;do
+for p in desktop.svg directory.svg trash_full.svg trash_empty.svg;do
 	case $p in
 		dir*)v=folder.svg;;
+		desktop*)v=x.svg;;
 		trash_empty*)v=trashcan_empty.svg;;
 		trash_full*)v=trashcan_full.svg;;
 	esac
@@ -152,5 +155,6 @@ echo "done!"
 # pack it up
 echo "Packaging ${pkg} as ${pkg}.tar.xz."
 [ -f "${pkg}.tar.xz" ] && rm "${pkg}.tar.xz"
-tar -cJf ${pkg}.tar.xz "${pkg}"
+(cd $pkg
+tar -cJf ../${pkg}.tar.xz * )
 echo 'Done!'
