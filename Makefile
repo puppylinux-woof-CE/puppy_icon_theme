@@ -6,6 +6,9 @@ ICNS_HOME = /usr/share/icons
 all:
 	./build_theme
 
+package:
+	./build_tar.sh
+
 install:
 	install -d -m 0755 $(DESTDIR)/$(ICNS_HOME)/"$(THEME)"
 	-cp -ar "$(THEME)"/* $(DESTDIR)/$(ICNS_HOME)/"$(THEME)"

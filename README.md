@@ -2,15 +2,23 @@
 
 Standard SVG icons for Puppy Linux (or other Linux).
 
-These icons when packaged (xz compressed) are only 52KB! They expand to over
-5MB (on disk). They are derived from @zigbert 's work in woof-CE, with ideas
+These icons are derived from @zigbert 's work in woof-CE, with ideas
 from @technosaurus .
+
+## Preview
+
+[<img src="PuppyStandard.png" style="width:100%">](PuppyStandard.png)
+
 
 ## Build
 
-First type `export THEME="Puppy Standard"`.
+First edit (if using a distro other than puppy) then "source" the `build.conf` file then run `make`.
 
-Then type `make`.
+
+```sh
+. ./build.conf
+make
+```
 
 The icons will be built in `"Puppy Standard"` directory.
 
