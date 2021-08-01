@@ -15,5 +15,5 @@ install:
 
 clean:
 	-rm -rf "$(THEME)"
-	-rm -f *.tar.xz
+	-rm -f *.tar.xz*
 	-rm -rf *_icons
