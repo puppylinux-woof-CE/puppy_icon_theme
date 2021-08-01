@@ -29,6 +29,7 @@ jobs:
       - name: Build
         run: ./puppy.sh
       - name: Create Release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -39,6 +40,7 @@ jobs:
           draft: false
           prerelease: false
       - name: Upload Release Asset
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         id: upload-release-asset   
         uses: actions/upload-release-asset@v1
         env:
@@ -49,6 +51,7 @@ jobs:
           asset_name: puppy_standard_icons.tar.xz
           asset_content_type: application/x-xz-compressed-tar
       - name: Upload Release Asset 1
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         id: upload-release-asset-1  
         uses: actions/upload-release-asset@v1
         env:
