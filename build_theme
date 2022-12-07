@@ -48,7 +48,7 @@ done < ../theme.conf
 # constuct the index.theme
 echo '[Icon Theme]' > "${THEME}"/index.theme
 echo "Name=${THEME}" >> "${THEME}"/index.theme
-echo "Inherits=Hicolor" >> "${THEME}"/index.theme
+echo "Inherits=hicolor" >> "${THEME}"/index.theme
 echo "Comment=$COMMENT" >> "${THEME}"/index.theme
 echo -n "Directories=" >> "${THEME}"/index.theme
 (cd "${THEME}"; find ./16 ./22 ./24 ./32 ./48 ./64 ./scalable -mindepth 1 -type d) > $TMP0
